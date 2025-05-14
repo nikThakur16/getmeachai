@@ -1,0 +1,90 @@
+import Image from "next/image";
+import tea from "../../assets/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
+import man from "../../assets/images/man.jpg";
+import coin from "../../assets/gifs/coin.gif";
+import group from "../../assets/gifs/group.gif";
+
+export default function Home() {
+  return (
+    <>
+      <div className="flex flex-col gap-4 items-center justify-center  h-[44vh]">
+        <div className="text-white flex gap-2 items-center text-6xl font-bold">
+          Buy me a Chai{" "}
+          <span>
+            <Image
+              src={tea}
+              alt="tht"
+              width={40}
+              height={40}
+              className="w-18 rounded-full  h-18"
+            />
+          </span>
+        </div>
+        <p className="text-white  font-bold tracking-wide">
+          Get me a Chai is a platform for funding your projects.
+        </p>
+        <div className="flex  gap-2">
+          <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Start Here
+            </span>
+          </button>
+          <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Read more
+            </span>
+          </button>
+        </div>
+      </div>
+      <div className="bg-white h-1 opacity-10"></div>
+      <div className=" text-white container mx-auto py-28">
+        <h1 className="text-center text-2xl mb-14 font-bold">
+          {" "}
+          Your Fans can buy you a chai
+        </h1>
+        <div className="flex items-center text-white justify-around">
+        <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={man} className="rounded-full text-black" width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+          <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={coin} className="rounded-full text-black" width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+          <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={group} className="rounded-full text-black " width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white h-1 opacity-10"></div>
+      <div className=" text-white container mx-auto py-28">
+        <h1 className="text-center text-2xl mb-14 font-bold">
+          {" "}
+          Your Fans can buy you a chai
+        </h1>
+        <div className="flex items-center text-white justify-around">
+        <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={man} className="rounded-full text-black" width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+          <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={coin} className="rounded-full text-black" width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+          <div className="items-center space-y-3  flex flex-col justify-center ">
+            <Image src={group} className="rounded-full text-black " width={88} alt="" />
+            <p className="font-bold">fund yourself</p>
+            <p className="text-center">Your fans wants to help you</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
