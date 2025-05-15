@@ -1,0 +1,199 @@
+.login-bg * {
+    box-sizing: border-box;
+  }
+  .login-bg {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    margin: -20px 0 50px;
+  }
+  .login-bg h1 {
+    font-weight: 600;
+    margin: 0;
+  }
+  .login-bg h2 {
+    text-align: center;
+  }
+  .login-bg p {
+    font-size: 0.85rem;
+    font-weight: 200;
+    line-height: 1.25rem;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+  }
+  .login-bg span {
+    font-size: 0.75rem;
+  }
+  .login-bg a {
+    color: #333333;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin: 15px 0;
+  }
+  .login-bg button {
+    border-radius: 20px;
+    border: 1px solid #27cda7;
+    background-color: #27cda7;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.75rem 2.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.25s ease-in;
+    cursor: pointer;
+  }
+  .login-bg button:hover {
+    background-color: #37dfb8;
+  }
+  .login-bg button:active {
+    transform: scale(0.95);
+  }
+  .login-bg button:focus {
+    outline: none;
+  }
+  .login-bg button.ghost {
+    background-color: transparent;
+    border-color: #ffffff;
+  }
+  .login-bg form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+  }
+  .login-bg input {
+    background-color: #eeeeee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+  }
+  .login-bg .container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 400px;
+  }
+  .login-bg .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+  }
+  .login-bg .login-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  .login-bg .container.right-panel-active .login-container {
+    transform: translateX(100%);
+  }
+  .login-bg .signup-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
+  .login-bg .container.right-panel-active .signup-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.5s;
+  }
+  .login-bg .social-container {
+    margin: 20px 0;
+  }
+  .login-bg .social-container a {
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+  }
+  @keyframes show {
+    0%, 49.99% {
+      opacity: 0;
+      z-index: 1;
+    }
+    50%, 100% {
+      opacity: 1;
+      z-index: 5;
+    }
+  }
+  .login-bg .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    z-index: 100;
+  }
+  .login-bg .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  }
+  .login-bg .overlay {
+    background: linear-gradient(to right, #37dfb8, #e87b37, #e8375a);
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
+  }
+  .login-bg .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+  .login-bg .overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transition: transform 0.5s ease-in-out;
+  }
+  .login-bg .overlay-left {
+    transform: translateX(-20%);
+  }
+  .login-bg .container.right-panel-active .overlay-left {
+    transform: translateX(0);
+  }
+  .login-bg .overlay-right {
+    right: 0;
+    transform: translateX(0);
+  }
+  .login-bg .container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+  }
+  @media (max-width: 730px) {
+    .login-bg h1 {
+      font-size: 1.2rem;
+    }
+  }
+  

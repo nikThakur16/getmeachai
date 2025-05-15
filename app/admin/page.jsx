@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import tea from "../../assets/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
 import man from "../../assets/images/man.jpg";
