@@ -6,15 +6,27 @@ import { FaFacebookF, FaGooglePlusG, FaLinkedinIn, FaGithub } from 'react-icons/
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { PageTransition } from '../../../components/loaders/PageTransition';
 export default function LoginPage() {
   const [rightPanelActive, setRightPanelActive] = useState(false);
   const { data: session , status } = useSession();
   const router = useRouter();
+
+  const [showTransition, setShowTransition] = useState(false);
+
+
   useEffect(() => {
-    if(status === "authenticated"){
-      router.push("/admin")
+    if (status === "authenticated") {
+      setShowTransition(true);
+      setTimeout(() => {
+        router.push("/admin");
+      }, 1000); // Show transition for 1 second before navigating
     }
-  }, [status])
+  }, [status, router]);
+
+  if (showTransition) {
+    return <PageTransition />;
+  }
 
   return (
     <div className="login-bg">

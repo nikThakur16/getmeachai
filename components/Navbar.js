@@ -1,19 +1,23 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import { useRouterRouter } from 'next/router';
 import DropDown from './DropDown'
+import NavbarSkeleton from './loaders/navbar/NavbarSkeleton'
 const Navbar = () => {
   const { data: session  , status } = useSession()
-  console.log(session);
+  console.log(status);
   const router = useRouter();
- useEffect(() => {
+
   if(status === "unauthenticated"){
     router.push("/")
   }
- }, [status])
+
+ 
+  if (status === "loading") return <NavbarSkeleton/>
+  
 
 
   return (

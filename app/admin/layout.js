@@ -10,7 +10,7 @@ export default function MainLayout({ children }) {
   return (
     <div>
       <Navbar />
-      <div className="min-h-[90vh] z-[-2] bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
+      <div className="min-h-[90vh]  z-[-2] bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
         {children}
       </div>
       <Footer />

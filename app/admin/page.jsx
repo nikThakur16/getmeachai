@@ -1,12 +1,28 @@
 
+"use client"
 import Image from "next/image";
-import tea from "../../assets/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
-import man from "../../assets/images/man.jpg";
-import coin from "../../assets/gifs/coin.gif";
-import group from "../../assets/gifs/group.gif";
-
+import tea from "../../public/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
+import man from "../../public/images/man.jpg";
+import coin from "../../public/gifs/coin.gif";
+import group from "../../public/gifs/group.gif";
+import HomeSkeleton from "../../components/loaders/admin/HomeSkeleton";
 import "@/globals.css"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const { data: session , status } = useSession();
+  const router = useRouter();
+
+  if(status === "unauthenticated"){
+    router.push("/")
+  }
+  
+  if(status === "loading"){
+    return <HomeSkeleton/>
+  }
+  
+
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center  h-[44vh]">
