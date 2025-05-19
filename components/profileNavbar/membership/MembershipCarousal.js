@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import MembershipCard from './MembershipCard';
 import { NextArrow, PrevArrow } from '../../CustomArrows';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function MembershipCarousel() {
   const data = [

@@ -1,79 +1,79 @@
-// "use server"
+"use server"
 
-// import Razorpay from "razorpay"
-// import Payment from "@/models/Payment"
-// import connectDb from "@/db/connectDb"
-// import User from "@/models/User"
+import Razorpay from "razorpay"
+import Payment from "@/models/Payment"
+import connectDb from "@/db/connectDb"
+import User from "@/models/User"
 
+// 1. Initiate Razorpay payment
+export const initiate = async (amount, to_username, paymentform) => {
+    await connectDb()
 
-// export const initiate = async (amount, to_username, paymentform) => {
-//     await connectDb()
-//     // fetch the secret of the user who is getting the payment 
-//     let user = await User.findOne({username: to_username})
-//     const secret = user.razorpaysecret
+    const user = await User.findOne({ username: to_username })
+    const secret = user.razorpaysecret
 
-//     var instance = new Razorpay({ key_id: user.razorpayid, key_secret: secret })
+    const instance = new Razorpay({
+        key_id: user.razorpayid,
+        key_secret: secret,
+    })
 
+    const options = {
+        amount: Number.parseInt(amount),
+        currency: "INR",
+    }
 
+    const x = await instance.orders.create(options)
 
-//     let options = {
-//         amount: Number.parseInt(amount),
-//         currency: "INR",
-//     }
+    // Save pending payment in DB
+    await Payment.create({
+        oid: x.id,
+        amount: amount / 100,
+        to_user: to_username,
+        name: paymentform.name,
+        message: paymentform.message,
+    })
 
-//     let x = await instance.orders.create(options)
-
-//     // create a payment object which shows a pending payment in the database
-//     await Payment.create({ oid: x.id, amount: amount/100, to_user: to_username, name: paymentform.name, message: paymentform.message })
-
-//     return x
-
-// }
-
-
-// export const fetchuser = async (username) => {
-//     await connectDb()
-//     let u = await User.findOne({ username: username })
-//     let user = u.toObject({ flattenObjectIds: true })
-//     return user
-// }
-
-// export const fetchpayments = async (username) => {
-//     await connectDb()
-//     // find all payments sorted by decreasing order of amount and flatten object ids
-//     let p = await Payment.find({ to_user: username, done:true }).sort({ amount: -1 }).limit(10).lean()
-//     return p
-// }
-
-// export const updateProfile = async (data, oldusername) => {
-//     await connectDb()
-//     let ndata = Object.fromEntries(data)
-
-//     // If the username is being updated, check if username is available
-//     if (oldusername !== ndata.username) {
-//         let u = await User.findOne({ username: ndata.username })
-//         if (u) {
-//             return { error: "Username already exists" }
-//         }   
-//         await User.updateOne({email: ndata.email}, ndata)
-//         // Now update all the usernames in the Payments table 
-//         await Payment.updateMany({to_user: oldusername}, {to_user: ndata.username})
-        
-//     }
-//     else{
-
-        
-//         await User.updateOne({email: ndata.email}, ndata)
-//     }
-
-
-// }
-import React from 'react'
-
-const useractions = () => {
-  return (
-    <div>useractions</div>
-  )
+    return x
 }
 
-export default useractions
+// 2. Fetch user details
+export const fetchuser = async (username) => {
+    await connectDb()
+    const u = await User.findOne({ username })
+    return u?.toObject({ flattenObjectIds: true })
+}
+
+// 3. Fetch successful payments
+export const fetchpayments = async (username) => {
+    await connectDb()
+    const p = await Payment.find({ to_user: username, done: true })
+        .sort({ amount: -1 })
+        .limit(10)
+        .lean()
+    return p
+}
+
+// 4. Update user profile
+export const updateProfile = async (data, oldusername) => {
+    await connectDb()
+
+    const ndata = data // ✅ Fixed: no Object.fromEntries here
+
+    // If username is changed, check if new one exists
+    if (oldusername !== ndata.username) {
+        const existingUser = await User.findOne({ username: ndata.username })
+        if (existingUser) {
+            return { error: "Username already exists" }
+        }
+
+        // Update user
+        await User.updateOne({ email: ndata.email }, ndata)
+
+        // Update all payment records with the new username
+        await Payment.updateMany({ to_user: oldusername }, { to_user: ndata.username })
+    } else {
+        await User.updateOne({ email: ndata.email }, ndata)
+    }
+
+    return { success: true }
+}
