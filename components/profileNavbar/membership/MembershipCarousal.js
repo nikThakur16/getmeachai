@@ -65,7 +65,7 @@ export default function MembershipCarousel() {
     prevArrow: <PrevArrow />,
  
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 1024, settings: { slidesToShow: 3} },
       { breakpoint: 768,  settings: { slidesToShow: 2 } },
       { breakpoint: 480,  settings: { slidesToShow: 1 } },
     ],
@@ -73,7 +73,7 @@ export default function MembershipCarousel() {
 
   return (
     <div className="  max-w-screen-xl mx-auto   py-8">
-      <h2 className="text-2xl text-center text-white mb-6">
+      <h2 className="md:text-2xl text-xl text-center text-white mb-6">
         Choose your membership
       </h2>
       <Slider {...settings} className="px-8 ">

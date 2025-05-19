@@ -5,24 +5,29 @@ import './login.css';
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { PageTransition } from '../../../components/loaders/PageTransition';
 export default function LoginPage() {
   const [rightPanelActive, setRightPanelActive] = useState(false);
   const { data: session , status } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   const [showTransition, setShowTransition] = useState(false);
 
 
   useEffect(() => {
-    if (status === "authenticated") {
+    const queryParams = new URLSearchParams(window.location.search);
+    const isPaymentRedirect = queryParams.get('paymentdone') === 'true';
+  
+    if (status === "authenticated" && pathname === "/" && !isPaymentRedirect) {
       setShowTransition(true);
       setTimeout(() => {
         router.push("/admin");
-      }, 1000); // Show transition for 1 second before navigating
+      }, 1000);
     }
-  }, [status, router]);
+  }, [status, router, pathname]);
+  
 
   if (showTransition) {
     return <PageTransition />;

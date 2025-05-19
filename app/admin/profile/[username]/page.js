@@ -8,10 +8,15 @@ export default async function UsernamePage(props) {
   await connectDb();
 
   const user = await User.findOne({ username });
+  
+
+
 
   if (!user) {
     return notFound();
   }
+  
+  
 
   return (
     <>

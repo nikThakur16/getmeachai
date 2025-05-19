@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
@@ -21,15 +21,17 @@ const Dashboard = () => {
         razorpaysecret: ''
     })
 
-    useEffect(() => {
-        if (status === "loading") return
+    const hasFetched = useRef(false);
 
-        if (!session) {
-            router.push('/login')
-        } else {
-            getData()
-        }
-    }, [session, status])
+    useEffect(() => {
+      if (status === "authenticated" && !hasFetched.current) {
+        hasFetched.current = true;
+        getData();
+      } else if (status !== "loading" && !session) {
+        router.push('/');
+      }
+    }, [status]);
+    
 
     const getData = async () => {
         try {

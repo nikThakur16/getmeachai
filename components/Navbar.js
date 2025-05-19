@@ -2,27 +2,37 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useRouterRouter } from 'next/router';
 import DropDown from './DropDown'
 import NavbarSkeleton from './loaders/navbar/NavbarSkeleton'
 const Navbar = () => {
   const { data: session  , status } = useSession()
+  const user = session?.user
   console.log(status);
   const router = useRouter();
+  const pathname = usePathname();
 
-  if(status === "unauthenticated"){
-    router.push("/")
-  }
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const isPaymentRedirect = queryParams.get('paymentdone') === 'true';
+  
+    if (status === "authenticated" && pathname === "/" && !isPaymentRedirect) {
+     
+      setTimeout(() => {
+        router.push("/admin");
+      }, 1000);
+    }
+  }, [status, router, pathname]);
  
   if (status === "loading") return <NavbarSkeleton/>
   
 
 
   return (
-    <div className='flex justify-between items-center h-18 p-4 text-white bg-gray-900 '>
-        <div className='logo text-xl font-bold' onClick={() => router.push("/admin")} style={{cursor: "pointer"}}>get me a chai</div>
+    <div className='flex justify-between items-center lg:h-18 md:h-12 h-10 p-4 text-white bg-gray-900 '>
+        <div className='logo md:text-xl text-xs font-bold' onClick={() => router.push("/admin")} style={{cursor: "pointer"}}>get me a chai</div>
         {/* <ul className='flex gap-4'>
             <li>Home</li>
             <li>About</li>

@@ -10,10 +10,10 @@ export const initiate = async (amount, to_username, paymentform) => {
     await connectDb()
 
     const user = await User.findOne({ username: to_username })
-    const secret = user.razorpaysecret
+    const secret = user?.razorpaysecret
 
     const instance = new Razorpay({
-        key_id: user.razorpayid,
+        key_id: user?.razorpayid,
         key_secret: secret,
     })
 
@@ -50,7 +50,13 @@ export const fetchpayments = async (username) => {
         .sort({ amount: -1 })
         .limit(10)
         .lean()
-    return p
+    // Convert _id and date fields to strings for serialization
+    return p.map(payment => ({
+        ...payment,
+        _id: payment._id?.toString?.(),
+        createdAt: payment.createdAt?.toISOString?.(),
+        updatedAt: payment.updatedAt?.toISOString?.(),
+    }))
 }
 
 // 4. Update user profile

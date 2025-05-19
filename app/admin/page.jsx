@@ -9,14 +9,16 @@ import HomeSkeleton from "../../components/loaders/admin/HomeSkeleton";
 import "@/globals.css"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { useEffect } from "react";
 export default function Home() {
   const { data: session , status } = useSession();
   const router = useRouter();
+  useEffect(() => {
+    if(status == "unauthenticated"){
+      router.push("/")
+    }
+  }, [status, router])
 
-  if(status === "unauthenticated"){
-    router.push("/")
-  }
   
   if(status === "loading"){
     return <HomeSkeleton/>
@@ -26,7 +28,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center  h-[44vh]">
-        <div className="text-white flex gap-2 items-center text-6xl font-bold">
+        <div className="text-white flex gap-2 items-center lg:text-6xl md:text-4xl text-xl font-bold">
           Buy me a Chai{" "}
           <span>
             <Image
@@ -34,11 +36,11 @@ export default function Home() {
               alt="tht"
               width={40}
               height={40}
-              className="w-18 rounded-full  h-18"
+              className="lg:w-18 md:w-14 w-8 rounded-full  lg:h-18 md:h-14   h-8"
             />
           </span>
         </div>
-        <p className="text-white  font-bold tracking-wide">
+        <p className="text-white  font-bold tracking-wide lg:text-xl md:text-base text-xs ">
           Get me a Chai is a platform for funding your projects.
         </p>
         <div className="flex  gap-2">
@@ -55,12 +57,12 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-white h-1 opacity-10"></div>
-      <div className=" text-white container mx-auto py-28">
-        <h1 className="text-center text-2xl mb-14 font-bold">
+      <div className=" text-white container mx-auto lg:py-28 py-10 md:py-14">
+        <h1 className="text-center md:text-2xl text-xl mb-14 font-bold">
           {" "}
           Your Fans can buy you a chai
         </h1>
-        <div className="flex items-center text-white justify-around">
+        <div className=" flex-col md:flex-row flex gap-8 md:gap-0   items-center text-white justify-around">
         <div className="items-center space-y-3  flex flex-col justify-center ">
             <Image src={man} className="rounded-full text-black" width={88} alt="" />
             <p className="font-bold">fund yourself</p>
@@ -80,12 +82,12 @@ export default function Home() {
       </div>
 
       <div className="bg-white h-1 opacity-10"></div>
-      <div className=" text-white container mx-auto py-28">
-        <h1 className="text-center text-2xl mb-14 font-bold">
+      <div className=" text-white container mx-auto lg:py-28 py-10 md:py-14">
+        <h1 className="text-center md:text-2xl text-xl mb-14 font-bold">
           {" "}
           Your Fans can buy you a chai
         </h1>
-        <div className="flex items-center text-white justify-around">
+        <div className=" flex-col md:flex-row flex gap-8 md:gap-0   items-center text-white justify-around">
         <div className="items-center space-y-3  flex flex-col justify-center ">
             <Image src={man} className="rounded-full text-black" width={88} alt="" />
             <p className="font-bold">fund yourself</p>
