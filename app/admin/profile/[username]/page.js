@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import connectDb from "@/db/connectDb";
+import connectDb from "@/components/db/connectDb";
 import User from "@/models/User";
 import Profile from "@/components/Profile";
 

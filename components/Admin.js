@@ -1,52 +1,23 @@
-
+"use client"
 import Image from "next/image";
-import tea from "../../public/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
-import man from "../../public/images/man.jpg";
-import coin from "../../public/gifs/coin.gif";
-import group from "../../public/gifs/group.gif";
-import HomeSkeleton from "../../components/loaders/admin/HomeSkeleton";
+import tea from "../public/gifs/b5b8c7da58df37753b3786dee8b8288e.gif"
+import man from "../public/images/man.jpg";
+import coin from "../public/gifs/coin.gif";
+import group from "../public/gifs/group.gif";
+import HomeSkeleton from "../components/loaders/admin/HomeSkeleton";
 import "@/globals.css"
 import { useSession } from "next-auth/react";
-// import { useRouter } from "next/navigation";
-// import { useEffect } from "react";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authoptions } from "../api/auth/[...nextauth]/route";
-import Admin from "@/components/Admin";
-export default async function Home() {
-  const sessions = await getServerSession(authoptions);
-
-  if (!sessions) {
-    redirect("/"); // or "/login"
-  }
-
-  // const { data: session , status } = useSession();
-  // const router = useRouter();
-  // const [loading, setLoading] = useState(true);
- 
-
-  
-  // if(status === "loading"){
-    
-  //   return <HomeSkeleton/>
-  // }
-  
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-    
-  //     setLoading(false);
-  //   }, 4000); // 2 seconds delay
-
-  //   return () => clearTimeout(timer); // Cleanup the timer on component unmount
-  // }, []);
-  // if (loading) {
-  //   return <HomeSkeleton />;
-  // }
+const Admin = () => {
+    const {data:session, status} = useSession();
 
 
-  return (
-    <>
-      {/* <div className="flex flex-col gap-4 items-center justify-center  h-[44vh]">
+ if(status === "loading"){
+    return <HomeSkeleton/>
+ }
+
+     return (
+   <>
+    <div className="flex flex-col gap-4 items-center justify-center  h-[44vh]">
         <div className="text-white flex gap-2 items-center lg:text-6xl md:text-4xl text-xl font-bold">
           Buy me a Chai{" "}
           <span>
@@ -123,8 +94,9 @@ export default async function Home() {
             <p className="text-center">Your fans wants to help you</p>
           </div>
         </div>
-      </div> */}
-      <Admin/>
-    </>
-  );
+      </div>
+   </>
+  )
 }
+
+export default Admin

@@ -22,9 +22,9 @@ export default function LoginPage() {
   
     if (status === "authenticated" && pathname === "/" && !isPaymentRedirect) {
       setShowTransition(true);
-      setTimeout(() => {
+    
         router.push("/admin");
-      }, 1000);
+     
     }
   }, [status, router, pathname]);
   

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Payment from "@/models/Payment";
-import connectDb from "@/db/connectDb";
+import connectDb from "@/components/db/connectDb";
 import User from "@/models/User";
 import crypto from "crypto";
 

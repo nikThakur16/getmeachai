@@ -31,7 +31,7 @@ const Navbar = () => {
 
 
   return (
-    <div className='flex justify-between items-center lg:h-18 md:h-12 h-10 p-4 text-white bg-gray-900 '>
+    <div className='flex justify-between items-center lg:h-18 md:h-12 h-10 p-4 text-white bg-gray-900  overflow-hidden'>
         <div className='logo md:text-xl text-xs font-bold' onClick={() => router.push("/admin")} style={{cursor: "pointer"}}>get me a chai</div>
         {/* <ul className='flex gap-4'>
             <li>Home</li>

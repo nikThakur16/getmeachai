@@ -1,23 +1,41 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MembershipCarousel from "./profileNavbar/membership/MembershipCarousal"
 import About from "./profileNavbar/About"
 import Collections from "./profileNavbar/Collections"
+import { fetchuser, updateProfile } from '@/actions/useractions'
 
 const Profile = ({username}) => {
     const user = username
     console.log("user", user)
-  const [activeTab, setActiveTab] = useState('Home');
+  const [activeTab, setActiveTab] = useState('Collections');
   const tabs = ['Home', 'Collections', 'About'];
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await fetchuser(username);
+      setUsers(userData);
+    };
+    fetchUser();
+  }, [username]);
+
   return (
     <div className="text-white h-full ">
-      <div className="w-full h-[45vh] relative overflow-hidden bg-black rounded-b-xl shadow-lg ">
-        <img
-          src="/gifs/space.gif"
-          alt="luffyy"
-          className=" absolute top-0 left-1/2 -translate-x-1/2   object-cover "
-        ></img>
-      </div>
+  
+{(users?.coverpic) ?(
+   <div className="w-full h-[45vh] relative overflow-hidden rounded-b-xl shadow-lg ">
+    <img src={users?.coverpic} alt="cover" className="w-full h-full object-cover object-top " />
+   </div>
+  ):(    <div className="w-full h-[45vh] relative overflow-hidden bg-black rounded-b-xl shadow-lg ">
+    <img
+      src="/gifs/space.gif"
+      alt="luffyy"
+      className=" absolute top-0 left-1/2 -translate-x-1/2   object-cover "
+    ></img>
+  </div>)}
+
+
       <div className=" flex flex-col space-y-1.5 items-center justify-center lg:mt-[-80px] md:mt-[-60px] mt-[-40px] ">
         <img src="/images/zoro.jpg" className="lg:w-[140px] md:w-[120px] w-[80px] lg:h-[140px] md:h-[120px] h-[80px] object-cover rounded-lg z-[10]" alt="zoro" />
         <h2 className="lg:text-3xl md:text-2xl text-xl font-bold mt-4"> Roronoa Zoro</h2>
