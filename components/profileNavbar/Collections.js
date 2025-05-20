@@ -172,11 +172,11 @@ const Collections = ({ data }) => {
           </div>
 
           {/* Quick Pay Buttons */}
-          <div className='flex flex-col md:flex-row gap-2 mt-5'>
+          <div className='flex items-center  gap-2 mt-5'>
             {[10, 20, 30].map((amt) => (
               <button
                 key={amt}
-                className='bg-slate-800 p-3 rounded-lg'
+                className='bg-slate-800 p-2 text-xs rounded-lg'
                 onClick={() => pay(amt * 100)}
               >
                 Pay ₹{amt}

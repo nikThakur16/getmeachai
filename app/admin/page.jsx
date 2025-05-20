@@ -9,10 +9,11 @@ import HomeSkeleton from "../../components/loaders/admin/HomeSkeleton";
 import "@/globals.css"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export default function Home() {
   const { data: session , status } = useSession();
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if(status == "unauthenticated"){
       router.push("/")
@@ -20,10 +21,23 @@ export default function Home() {
   }, [status, router])
 
   
-  if(status === "loading"){
-    return <HomeSkeleton/>
-  }
+  // if(status === "loading"){
+    
+  //   return <HomeSkeleton/>
+  // }
   
+  useEffect(() => {
+    const timer = setTimeout(() => {
+    
+      setLoading(false);
+    }, 4000); // 2 seconds delay
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
+  if (loading) {
+    return <HomeSkeleton />;
+  }
+
 
   return (
     <>

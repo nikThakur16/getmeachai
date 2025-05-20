@@ -5,7 +5,7 @@ export default function MembershipCard({ data }) {
     <div
       className={`
         flex-shrink-0
-        lg:w-[20vw] md:w-[40vw] w-full
+       h-full w-full
         bg-gray-800 
         rounded-xl 
         overflow-hidden 

@@ -1,27 +1,25 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-const NextArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        onClick={onClick}
-        className="absolute  lg:right-[-50px] md:right-[15px] right-[-10px] top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10 cursor-pointer border border-gray-300 text-[#0F7B9B] bg-gray-100 rounded-full md:p-1 p-[5px] shadow-lg"
-      >
-        <FaChevronRight className="lg:size-6 md:size-5 size-4" />
-      </div>
-    );
-  };
-  
-  // Custom Prev Arrow
-  const PrevArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        onClick={onClick}
-        className="absolute lg:left-[-50px] md:left-[17px] left-[10px] top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-10 cursor-pointer border border-gray-300 text-[#0F7B9B] bg-gray-100 rounded-full md:p-1 p-[5px] shadow-lg"
-      >
-        <FaChevronLeft className="lg:size-6 md:size-5 size-4" />
-      </div>
-    );
-  };
 
-  export { NextArrow, PrevArrow };
+const NextArrow = ({ onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="absolute top-1/2 right-0 md:right-2 lg:right- transform -translate-y-1/2 z-10 cursor-pointer border border-gray-300 text-[#0F7B9B] bg-gray-100 rounded-full p-2 shadow-lg"
+    >
+      <FaChevronRight className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
+    </div>
+  );
+};
+
+const PrevArrow = ({ onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="absolute top-1/2 left-2 md:left-4 lg:left-6 transform -translate-y-1/2 z-10 cursor-pointer border border-gray-300 text-[#0F7B9B] bg-gray-100 rounded-full p-2 shadow-lg"
+    >
+      <FaChevronLeft className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
+    </div>
+  );
+};
+
+export { NextArrow, PrevArrow };
