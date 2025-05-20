@@ -12,6 +12,7 @@ export const metadata = {
 
 export default async function MainLayout({ children }) {
   const session = await getServerSession(authoptions);
+  console.log("gigigigigi",session);
 
   if (!session) {
     redirect("/"); // or "/login"
